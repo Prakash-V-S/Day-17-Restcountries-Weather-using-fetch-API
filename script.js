@@ -31,7 +31,7 @@ const handleWeatherButtonClick = (lat, lon, googleMaps, weatherContainer) => {
             weatherContainer.innerHTML = `<br>
                  <p>Weather: ${weatherInfo.weather[0].description}</p>
                 <p>Temperature: ${weatherInfo.main.temp} &#8451;</p>
-                ${weatherInfo.googleMaps ? `<p>googleMaps: <a href="${weatherInfo.googleMaps}">Click To Locate</a></p>` : ''}
+                ${weatherInfo.googleMaps ? `<p>googleMaps: <a target="_blank" href="${weatherInfo.googleMaps}">Click To Locate</a></p>` : ''}
             `;
         })
         .catch((error) => {
