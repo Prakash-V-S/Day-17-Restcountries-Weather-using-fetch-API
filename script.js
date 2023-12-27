@@ -31,9 +31,9 @@ const handleWeatherButtonClick = (lat, lon, googleMaps, weatherContainer) => {
     fetchWeather(lat, lon, googleMaps)
         .then((weatherInfo) => {
             weatherContainer.innerHTML = `<br>
-                 <p>Weather: ${weatherInfo.weather[0].description}</p>
-                <p>Temperature: ${weatherInfo.main.temp} &#8451;</p>
-                ${weatherInfo.googleMaps ? `<p>googleMaps: <a href="${weatherInfo.googleMaps}">Click To Locate</a></p>` : ''}
+                 <h6>Weather: ${weatherInfo.weather[0].description}</h6>
+                <h6>Temperature: ${weatherInfo.main.temp} &#8451;</h6>
+                ${weatherInfo.googleMaps ? `<h6>googleMaps: <a href="${weatherInfo.googleMaps}">Click To Locate</a></h6>` : ''}
             `;
         })
         .catch((error) => {
@@ -59,11 +59,11 @@ result
             <img src="${ele[i].flags.png}" class="card-img-top" style="height: 150px;">
             <div class="card-body">
                 <div class="card-text">
-                <h5 class="card-title">Capital: ${ele[i].capital}</h5>
-                <h5 class="card-title">Region: ${ele[i].region}</h5>
-                <h5 class="card-title">Sub Region: ${ele[i].subregion}</h5>
-                <h5 class="card-title">Country Code: ${ele[i].cca2}</h5>
-                <h5 class="card-title">LatLng: ${ele[i].latlng}</h5> 
+                <h6 class="card-title">Capital: ${ele[i].capital}</h6>
+                <h6 class="card-title">Region: ${ele[i].region}</h6>
+                <h6 class="card-title">Sub Region: ${ele[i].subregion}</h6>
+                <h6 class="card-title">Country Code: ${ele[i].cca2}</h6>
+                <h6 class="card-title">LatLng: ${ele[i].latlng}</h6> 
                 </div>
             </div>
             <button class="btn btn-primary" onclick="handleWeatherButtonClick(${ele[i].latlng[0]}, ${ele[i].latlng[1]}, '${ele[i].maps?.googleMaps}', this.nextElementSibling)">Click for Weather</button>
