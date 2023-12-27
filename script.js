@@ -16,12 +16,14 @@ titleElement.id = 'title';
 titleElement.className = 'text-center';
 titleElement.textContent = 'Restcountries & Weather using Fetch API';
 
-const countryContainer = document.createElement('div');
-countryContainer.className = 'row row-cols-1 row-cols-md-3 g-4';
-countryContainer.id = 'countryContainer';
+const row = document.createElement('div');
+row.className = 'row'; // Remove the space at the end
+row.id = 'row';
 
 containerDiv.appendChild(titleElement);
-containerDiv.appendChild(countryContainer);
+containerDiv.appendChild(row);
+
+document.body.appendChild(containerDiv);
 
 document.body.appendChild(containerDiv);
 
@@ -31,7 +33,7 @@ const handleWeatherButtonClick = (lat, lon, googleMaps, weatherContainer) => {
             weatherContainer.innerHTML = `<br>
                  <p>Weather: ${weatherInfo.weather[0].description}</p>
                 <p>Temperature: ${weatherInfo.main.temp} &#8451;</p>
-                ${weatherInfo.googleMaps ? `<p>googleMaps: <a target="_blank" href="${weatherInfo.googleMaps}">Click To Locate</a></p>` : ''}
+                ${weatherInfo.googleMaps ? `<p>googleMaps: <a href="${weatherInfo.googleMaps}">Click To Locate</a></p>` : ''}
             `;
         })
         .catch((error) => {
@@ -46,23 +48,30 @@ result
     .then((ele) => {
         for (let i = 0; i < ele.length; i++) {
             const card = document.createElement("div");
-            card.className = "col";
+            card.className = "col-sm-6 col-md-4 col-lg-4 col-xl-4";
             card.innerHTML = `
-                <div class="card">
-                    <div class="card-header">${ele[i].name.common}</div>
-                    <img src="${ele[i].flags.png}" class="card-img-top" style="height: 150px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Capital: ${ele[i].capital}</h5>
-                        <h5 class="card-title">Region: ${ele[i].region}</h5>
-                        <h5 class="card-title">Sub Region: ${ele[i].subregion}</h5>
-                        <h5 class="card-title">Country Code: ${ele[i].cca2}</h5>
-                        <h5 class="card-title">LatLng: ${ele[i].latlng}</h5>
-                    </div>
-                    <button class="btn btn-primary" onclick="handleWeatherButtonClick(${ele[i].latlng[0]}, ${ele[i].latlng[1]}, '${ele[i].maps?.googleMaps}', this.nextElementSibling)">Click for Weather</button>
-                    <div class="weather-container"></div>
+            <div id="fk" class="card h-100"> 
+           <br>
+            </div>
+            
+                  <div class="card">
+            <div class="card-header">${ele[i].name.common}</div>
+            <img src="${ele[i].flags.png}" class="card-img-top" style="height: 150px;">
+            <div class="card-body">
+                <div class="card-text">
+                <h5 class="card-title">Capital: ${ele[i].capital}</h5>
+                <h5 class="card-title">Region: ${ele[i].region}</h5>
+                <h5 class="card-title">Sub Region: ${ele[i].subregion}</h5>
+                <h5 class="card-title">Country Code: ${ele[i].cca2}</h5>
+                <h5 class="card-title">LatLng: ${ele[i].latlng}</h5> 
                 </div>
+            </div>
+            <button class="btn btn-primary" onclick="handleWeatherButtonClick(${ele[i].latlng[0]}, ${ele[i].latlng[1]}, '${ele[i].maps?.googleMaps}', this.nextElementSibling)">Click for Weather</button>
+            <div class="weather-container"></div>
+        </div>
+           
             `;
-            countryContainer.appendChild(card);
+            row.appendChild(card);
         }
     })
     .catch((error) => {
